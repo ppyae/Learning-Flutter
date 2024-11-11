@@ -30,13 +30,25 @@ class BodyPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Pressing snack bar button")));
-        },
-        child: Text("On press buttom"),
+    return const SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "min na no ni hon go 5",
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            "min na no ni hon go 3",
+            style: TextStyle(fontSize: 20),
+          ),
+          Text(
+            "min na no ni hon go 4",
+            style: TextStyle(fontSize: 20),
+          )
+        ],
       ),
     );
   }
