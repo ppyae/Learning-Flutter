@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profile/model/profile_model.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -20,6 +21,14 @@ class ProfileView extends StatelessWidget {
         ProfileImage(
           image: 'image/thel.jpg',
         ),
+        ProfileBody(
+          profileModel: ProfileModel(
+              profileImage: "image/",
+              name: "Thandar Htay",
+              phone: "09251299992",
+              email: "thandar2512@gmail.com",
+              address: "No 354, Bommar Kyaung street, NorthOkkalapa"),
+        )
       ]),
     );
   }
@@ -66,6 +75,56 @@ class ProfileImage extends StatelessWidget {
           radius: 70,
           backgroundImage: AssetImage(image),
         ),
+      ),
+    );
+  }
+}
+
+class ProfileBody extends StatelessWidget {
+  const ProfileBody({super.key, required this.profileModel});
+
+  final ProfileModel profileModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height / 6 * 2, left: 16, right: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ProfileBodyInfo(label: "Name", value: profileModel.name),
+          ProfileBodyInfo(label: "Phone", value: profileModel.phone),
+          ProfileBodyInfo(label: "Email", value: profileModel.email),
+          ProfileBodyInfo(label: "Address", value: profileModel.address),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileBodyInfo extends StatelessWidget {
+  const ProfileBodyInfo({super.key, required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+          Text(
+            value,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ],
       ),
     );
   }
