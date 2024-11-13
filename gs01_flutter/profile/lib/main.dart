@@ -8,11 +8,11 @@ void main(List<String> args) {
     theme: ThemeData(scaffoldBackgroundColor: Colors.grey),
     home: const ProfileData(
       profileModel: ProfileModel(
-          profileImage: "image/thel.jpg",
-          name: "Thandar Htay",
-          phone: "09251299992",
-          email: "thandar2512@gmail.com",
-          address: "No 364, Bommar Kyaung Street, NorthOkkalapa"),
+          profileImage: "image/download.jpg",
+          name: "Roronowa Zoro",
+          phone: "0947607040",
+          email: "zoro@gmail.com",
+          address: "Osaka ku, Japan"),
       child: ProfileView(),
     ),
   ));
