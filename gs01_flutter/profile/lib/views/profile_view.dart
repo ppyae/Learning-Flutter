@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:profile/model/profile_model.dart';
 
+class ProfileData extends InheritedWidget {
+  const ProfileData(
+      {super.key, required this.profileModel, required super.child});
+
+  final ProfileModel profileModel;
+
+  static ProfileData? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ProfileData>();
+  }
+
+  @override
+  bool updateShouldNotify(ProfileData oldWidget) {
+    return profileModel != oldWidget.profileModel;
+  }
+}
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -18,17 +34,8 @@ class ProfileView extends StatelessWidget {
       ),
       body: const Stack(children: [
         ProfileBackground(),
-        ProfileImage(
-          image: 'image/thel.jpg',
-        ),
-        ProfileBody(
-          profileModel: ProfileModel(
-              profileImage: "image/",
-              name: "Thandar Htay",
-              phone: "09251299992",
-              email: "thandar2512@gmail.com",
-              address: "No 354, Bommar Kyaung street, NorthOkkalapa"),
-        )
+        ProfileImage(),
+        ProfileBody(),
       ]),
     );
   }
@@ -59,9 +66,7 @@ class ProfileBackground extends StatelessWidget {
 }
 
 class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key, required this.image});
-
-  final String image;
+  const ProfileImage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,8 @@ class ProfileImage extends StatelessWidget {
         padding: const EdgeInsets.only(right: 40),
         child: CircleAvatar(
           radius: 70,
-          backgroundImage: AssetImage(image),
+          backgroundImage:
+              AssetImage(ProfileData.of(context)?.profileModel.profileImage),
         ),
       ),
     );
@@ -81,12 +87,12 @@ class ProfileImage extends StatelessWidget {
 }
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({super.key, required this.profileModel});
-
-  final ProfileModel profileModel;
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var profileModel = ProfileData.of(context)!.profileModel;
+
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height / 6 * 2, left: 16, right: 16),
